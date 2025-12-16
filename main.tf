@@ -49,6 +49,12 @@ resource "azurerm_postgresql_flexible_server" "main" {
     managed_by  = "terraform"
     service     = var.service_name
   }
+  
+  lifecycle {
+    ignore_changes = [
+      zone  # Let Azure manage zone assignment to avoid conflicts
+    ]
+  }
 }
 
 # Create Database
